@@ -105,3 +105,4 @@ Contributions are welcome! Feel free to open issues or submit pull requests to i
 - [TanStack](https://tanstack.com/) for their incredible open-source libraries.
 - [Clerk](https://clerk.com/) for seamless authentication and RBAC.
 - [shadcn/ui](https://ui.shadcn.com/) for beautiful UI components.
+
