@@ -2,15 +2,11 @@
 
 A modern, full-stack React application template built with [TanStack Start](https://tanstack.com/start), [Clerk](https://clerk.com/), and a rich ecosystem of cutting-edge tools.
 
----
-
 ## Overview
 
 This template leverages **TanStack Start**, a powerful React framework designed for maximum flexibility and scalability. It supports deployment anywhere JavaScript runs—traditional servers, serverless platforms, or even CDNs—thanks to its universal rendering capabilities. Built on top of [TanStack Router](https://tanstack.com/router/latest) and deeply integrated with [TanStack Query](https://tanstack.com/query/latest), it enables advanced routing, data fetching, and caching with ease.
 
 For authentication and authorization, it uses **Clerk**, providing seamless user management, social login, and **Role-Based Access Control (RBAC)**. RBAC allows you to define granular permissions and secure your app effectively. Learn more about Clerk RBAC [here](https://clerk.com/docs/references/nextjs/basic-rbac).
-
----
 
 ## Key Features
 
@@ -28,9 +24,7 @@ For authentication and authorization, it uses **Clerk**, providing seamless user
 - 🔔 **Sonner** — Elegant toast notifications.
 - 🎭 **Lucide Icons** — Beautiful, consistent icon set.
 - ⚙️ **TypeScript** — Fully typed codebase.
-- 🧹 **Prettier & ESLint** — Code formatting and linting with TanStack plugins.
-
----
+- 🧹 **Prettier & ESLint** — Code formatting and linting with TanStack plugins.l
 
 ## Getting Started
 
@@ -80,8 +74,6 @@ npm run start:dev
 
 Visit [http://localhost:3000](http://localhost:3000) to see your app in action.
 
----
-
 ## Project Structure
 
 ```plaintext
@@ -100,19 +92,13 @@ tanstack-start-query-clerk-template/
 └── README.md              # Project documentation
 ```
 
----
-
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
----
-
 ## Contributing
 
 Contributions are welcome! Feel free to open issues or submit pull requests to improve this template.
-
----
 
 ## Acknowledgements
 
