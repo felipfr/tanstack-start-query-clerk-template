@@ -29,6 +29,6 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "app.config.ts"
+    "vite.config.ts"
   ]
 }
