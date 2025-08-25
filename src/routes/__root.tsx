@@ -1,5 +1,15 @@
 import '@/styles/app.css'
 // The only reason to import css here is to make animations work
+
+import { ClerkLoaded, ClerkLoading, ClerkProvider } from '@clerk/tanstack-react-start'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from '@tanstack/react-router'
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+import { Provider as JotaiProvider } from 'jotai'
+import { ThemeProvider } from 'next-themes'
+import { ReactNode } from 'react'
+import { Toaster } from 'sonner'
+
 import { NotFound } from '@/components/pages/NotFound'
 import { DefaultCatchBoundary } from '@/components/shared/DefaultCatchBoundary'
 import { FullPageLoading } from '@/components/shared/FullPageLoading'
@@ -9,13 +19,6 @@ import { authStateFn } from '@/lib/server/auth'
 import type { RouterContext } from '@/lib/types/router-context'
 import { seo } from '@/lib/utils'
 import appCss from '@/styles/app.css?url'
-import { ClerkLoaded, ClerkLoading, ClerkProvider } from '@clerk/tanstack-react-start'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { HeadContent, Outlet, ReactNode, Scripts, createRootRouteWithContext } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-import { Provider as JotaiProvider } from 'jotai'
-import { ThemeProvider } from 'next-themes'
-import { Toaster } from 'sonner'
 
 export const Route = createRootRouteWithContext<RouterContext>()({
   beforeLoad: async () => {
