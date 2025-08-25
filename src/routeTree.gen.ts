@@ -8,132 +8,180 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AuthRouteImport } from './routes/_auth'
+import { Route as AuthBackofficeRouteImport } from './routes/_auth/backoffice'
+import { Route as AuthBackofficeIndexRouteImport } from './routes/_auth/backoffice/index'
+import { Route as AuthHomeIndexRouteImport } from './routes/_auth/_home/index'
+import { Route as AuthHelpHelpRouteImport } from './routes/_auth/_help/help'
+import { Route as AuthBackofficeSettingsIndexRouteImport } from './routes/_auth/backoffice/settings/index'
+import { Route as AuthHelpHelpHelpIdRouteImport } from './routes/_auth/_help/help.$helpId'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as LoginImport } from './routes/login'
-import { Route as AuthImport } from './routes/_auth'
-import { Route as AuthBackofficeImport } from './routes/_auth/backoffice'
-import { Route as AuthBackofficeIndexImport } from './routes/_auth/backoffice/index'
-import { Route as AuthHomeIndexImport } from './routes/_auth/_home/index'
-import { Route as AuthHelpHelpImport } from './routes/_auth/_help/help'
-import { Route as AuthBackofficeSettingsIndexImport } from './routes/_auth/backoffice/settings/index'
-import { Route as AuthHelpHelpHelpIdImport } from './routes/_auth/_help/help.$helpId'
-
-// Create/Update Routes
-
-const LoginRoute = LoginImport.update({
+const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AuthRoute = AuthImport.update({
+const AuthRoute = AuthRouteImport.update({
   id: '/_auth',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AuthBackofficeRoute = AuthBackofficeImport.update({
+const AuthBackofficeRoute = AuthBackofficeRouteImport.update({
   id: '/backoffice',
   path: '/backoffice',
   getParentRoute: () => AuthRoute,
 } as any)
-
-const AuthBackofficeIndexRoute = AuthBackofficeIndexImport.update({
+const AuthBackofficeIndexRoute = AuthBackofficeIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthBackofficeRoute,
 } as any)
-
-const AuthHomeIndexRoute = AuthHomeIndexImport.update({
+const AuthHomeIndexRoute = AuthHomeIndexRouteImport.update({
   id: '/_home/',
   path: '/',
   getParentRoute: () => AuthRoute,
 } as any)
-
-const AuthHelpHelpRoute = AuthHelpHelpImport.update({
+const AuthHelpHelpRoute = AuthHelpHelpRouteImport.update({
   id: '/_help/help',
   path: '/help',
   getParentRoute: () => AuthRoute,
 } as any)
-
 const AuthBackofficeSettingsIndexRoute =
-  AuthBackofficeSettingsIndexImport.update({
+  AuthBackofficeSettingsIndexRouteImport.update({
     id: '/settings/',
     path: '/settings/',
     getParentRoute: () => AuthBackofficeRoute,
   } as any)
-
-const AuthHelpHelpHelpIdRoute = AuthHelpHelpHelpIdImport.update({
+const AuthHelpHelpHelpIdRoute = AuthHelpHelpHelpIdRouteImport.update({
   id: '/$helpId',
   path: '/$helpId',
   getParentRoute: () => AuthHelpHelpRoute,
 } as any)
 
-// Populate the FileRoutesByPath interface
+export interface FileRoutesByFullPath {
+  '/login': typeof LoginRoute
+  '/backoffice': typeof AuthBackofficeRouteWithChildren
+  '/help': typeof AuthHelpHelpRouteWithChildren
+  '/': typeof AuthHomeIndexRoute
+  '/backoffice/': typeof AuthBackofficeIndexRoute
+  '/help/$helpId': typeof AuthHelpHelpHelpIdRoute
+  '/backoffice/settings': typeof AuthBackofficeSettingsIndexRoute
+}
+export interface FileRoutesByTo {
+  '/login': typeof LoginRoute
+  '/help': typeof AuthHelpHelpRouteWithChildren
+  '/': typeof AuthHomeIndexRoute
+  '/backoffice': typeof AuthBackofficeIndexRoute
+  '/help/$helpId': typeof AuthHelpHelpHelpIdRoute
+  '/backoffice/settings': typeof AuthBackofficeSettingsIndexRoute
+}
+export interface FileRoutesById {
+  __root__: typeof rootRouteImport
+  '/_auth': typeof AuthRouteWithChildren
+  '/login': typeof LoginRoute
+  '/_auth/backoffice': typeof AuthBackofficeRouteWithChildren
+  '/_auth/_help/help': typeof AuthHelpHelpRouteWithChildren
+  '/_auth/_home/': typeof AuthHomeIndexRoute
+  '/_auth/backoffice/': typeof AuthBackofficeIndexRoute
+  '/_auth/_help/help/$helpId': typeof AuthHelpHelpHelpIdRoute
+  '/_auth/backoffice/settings/': typeof AuthBackofficeSettingsIndexRoute
+}
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/login'
+    | '/backoffice'
+    | '/help'
+    | '/'
+    | '/backoffice/'
+    | '/help/$helpId'
+    | '/backoffice/settings'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/login'
+    | '/help'
+    | '/'
+    | '/backoffice'
+    | '/help/$helpId'
+    | '/backoffice/settings'
+  id:
+    | '__root__'
+    | '/_auth'
+    | '/login'
+    | '/_auth/backoffice'
+    | '/_auth/_help/help'
+    | '/_auth/_home/'
+    | '/_auth/backoffice/'
+    | '/_auth/_help/help/$helpId'
+    | '/_auth/backoffice/settings/'
+  fileRoutesById: FileRoutesById
+}
+export interface RootRouteChildren {
+  AuthRoute: typeof AuthRouteWithChildren
+  LoginRoute: typeof LoginRoute
+}
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_auth': {
-      id: '/_auth'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof AuthImport
-      parentRoute: typeof rootRoute
-    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
-      preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_auth/backoffice': {
       id: '/_auth/backoffice'
       path: '/backoffice'
       fullPath: '/backoffice'
-      preLoaderRoute: typeof AuthBackofficeImport
-      parentRoute: typeof AuthImport
-    }
-    '/_auth/_help/help': {
-      id: '/_auth/_help/help'
-      path: '/help'
-      fullPath: '/help'
-      preLoaderRoute: typeof AuthHelpHelpImport
-      parentRoute: typeof AuthImport
-    }
-    '/_auth/_home/': {
-      id: '/_auth/_home/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof AuthHomeIndexImport
-      parentRoute: typeof AuthImport
+      preLoaderRoute: typeof AuthBackofficeRouteImport
+      parentRoute: typeof AuthRoute
     }
     '/_auth/backoffice/': {
       id: '/_auth/backoffice/'
       path: '/'
       fullPath: '/backoffice/'
-      preLoaderRoute: typeof AuthBackofficeIndexImport
-      parentRoute: typeof AuthBackofficeImport
+      preLoaderRoute: typeof AuthBackofficeIndexRouteImport
+      parentRoute: typeof AuthBackofficeRoute
     }
-    '/_auth/_help/help/$helpId': {
-      id: '/_auth/_help/help/$helpId'
-      path: '/$helpId'
-      fullPath: '/help/$helpId'
-      preLoaderRoute: typeof AuthHelpHelpHelpIdImport
-      parentRoute: typeof AuthHelpHelpImport
+    '/_auth/_home/': {
+      id: '/_auth/_home/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AuthHomeIndexRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/_auth/_help/help': {
+      id: '/_auth/_help/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof AuthHelpHelpRouteImport
+      parentRoute: typeof AuthRoute
     }
     '/_auth/backoffice/settings/': {
       id: '/_auth/backoffice/settings/'
       path: '/settings'
       fullPath: '/backoffice/settings'
-      preLoaderRoute: typeof AuthBackofficeSettingsIndexImport
-      parentRoute: typeof AuthBackofficeImport
+      preLoaderRoute: typeof AuthBackofficeSettingsIndexRouteImport
+      parentRoute: typeof AuthBackofficeRoute
+    }
+    '/_auth/_help/help/$helpId': {
+      id: '/_auth/_help/help/$helpId'
+      path: '/$helpId'
+      fullPath: '/help/$helpId'
+      preLoaderRoute: typeof AuthHelpHelpHelpIdRouteImport
+      parentRoute: typeof AuthHelpHelpRoute
     }
   }
 }
-
-// Create and export the route tree
 
 interface AuthBackofficeRouteChildren {
   AuthBackofficeIndexRoute: typeof AuthBackofficeIndexRoute
@@ -175,136 +223,10 @@ const AuthRouteChildren: AuthRouteChildren = {
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
-export interface FileRoutesByFullPath {
-  '': typeof AuthRouteWithChildren
-  '/login': typeof LoginRoute
-  '/backoffice': typeof AuthBackofficeRouteWithChildren
-  '/help': typeof AuthHelpHelpRouteWithChildren
-  '/': typeof AuthHomeIndexRoute
-  '/backoffice/': typeof AuthBackofficeIndexRoute
-  '/help/$helpId': typeof AuthHelpHelpHelpIdRoute
-  '/backoffice/settings': typeof AuthBackofficeSettingsIndexRoute
-}
-
-export interface FileRoutesByTo {
-  '/login': typeof LoginRoute
-  '/help': typeof AuthHelpHelpRouteWithChildren
-  '/': typeof AuthHomeIndexRoute
-  '/backoffice': typeof AuthBackofficeIndexRoute
-  '/help/$helpId': typeof AuthHelpHelpHelpIdRoute
-  '/backoffice/settings': typeof AuthBackofficeSettingsIndexRoute
-}
-
-export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/_auth': typeof AuthRouteWithChildren
-  '/login': typeof LoginRoute
-  '/_auth/backoffice': typeof AuthBackofficeRouteWithChildren
-  '/_auth/_help/help': typeof AuthHelpHelpRouteWithChildren
-  '/_auth/_home/': typeof AuthHomeIndexRoute
-  '/_auth/backoffice/': typeof AuthBackofficeIndexRoute
-  '/_auth/_help/help/$helpId': typeof AuthHelpHelpHelpIdRoute
-  '/_auth/backoffice/settings/': typeof AuthBackofficeSettingsIndexRoute
-}
-
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | ''
-    | '/login'
-    | '/backoffice'
-    | '/help'
-    | '/'
-    | '/backoffice/'
-    | '/help/$helpId'
-    | '/backoffice/settings'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/login'
-    | '/help'
-    | '/'
-    | '/backoffice'
-    | '/help/$helpId'
-    | '/backoffice/settings'
-  id:
-    | '__root__'
-    | '/_auth'
-    | '/login'
-    | '/_auth/backoffice'
-    | '/_auth/_help/help'
-    | '/_auth/_home/'
-    | '/_auth/backoffice/'
-    | '/_auth/_help/help/$helpId'
-    | '/_auth/backoffice/settings/'
-  fileRoutesById: FileRoutesById
-}
-
-export interface RootRouteChildren {
-  AuthRoute: typeof AuthRouteWithChildren
-  LoginRoute: typeof LoginRoute
-}
-
 const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRouteWithChildren,
   LoginRoute: LoginRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/_auth",
-        "/login"
-      ]
-    },
-    "/_auth": {
-      "filePath": "_auth.tsx",
-      "children": [
-        "/_auth/backoffice",
-        "/_auth/_help/help",
-        "/_auth/_home/"
-      ]
-    },
-    "/login": {
-      "filePath": "login.tsx"
-    },
-    "/_auth/backoffice": {
-      "filePath": "_auth/backoffice.tsx",
-      "parent": "/_auth",
-      "children": [
-        "/_auth/backoffice/",
-        "/_auth/backoffice/settings/"
-      ]
-    },
-    "/_auth/_help/help": {
-      "filePath": "_auth/_help/help.tsx",
-      "parent": "/_auth",
-      "children": [
-        "/_auth/_help/help/$helpId"
-      ]
-    },
-    "/_auth/_home/": {
-      "filePath": "_auth/_home/index.tsx",
-      "parent": "/_auth"
-    },
-    "/_auth/backoffice/": {
-      "filePath": "_auth/backoffice/index.tsx",
-      "parent": "/_auth/backoffice"
-    },
-    "/_auth/_help/help/$helpId": {
-      "filePath": "_auth/_help/help.$helpId.tsx",
-      "parent": "/_auth/_help/help"
-    },
-    "/_auth/backoffice/settings/": {
-      "filePath": "_auth/backoffice/settings/index.tsx",
-      "parent": "/_auth/backoffice"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
