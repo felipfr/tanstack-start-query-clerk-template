@@ -1,8 +1,9 @@
-import { checkUserRoleSchema } from '@/lib/helpers/zod/check-user-role.schema'
-import type { AuthStateResponse, OrganizationRole } from '@/lib/types/auth'
 import { getAuth } from '@clerk/tanstack-react-start/server'
 import { createServerFn } from '@tanstack/react-start'
 import { getWebRequest } from '@tanstack/react-start/server'
+
+import { checkUserRoleSchema } from '@/lib/helpers/zod/check-user-role.schema'
+import type { AuthStateResponse, OrganizationRole } from '@/lib/types/auth'
 
 export const authStateFn = createServerFn({ method: 'GET' }).handler(async () => {
   const webRequest = getVerifiedWebRequest()
