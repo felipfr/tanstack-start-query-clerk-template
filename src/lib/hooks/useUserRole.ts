@@ -1,9 +1,9 @@
-import { newRelicAgent } from '@/lib/config/logs'
 import { checkRole } from '@/lib/server/auth'
 import type { OrganizationRole } from '@/lib/types/auth'
 import { useUser } from '@clerk/tanstack-react-start'
 import { useQuery } from '@tanstack/react-query'
 import { toast } from 'sonner'
+import { newRelicAgent } from '../config/logs/new-relic'
 
 type UseUserRoleProps = {
   role: OrganizationRole | OrganizationRole[]
